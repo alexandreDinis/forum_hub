@@ -1,0 +1,9 @@
+CREATE TABLE `users` (
+  `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL UNIQUE,
+  `email` VARCHAR(255) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL,
+  `profile_id` BIGINT NOT NULL,
+  `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_user_profile` FOREIGN KEY (`profile_id`) REFERENCES `profiles` (`id`)
+);
