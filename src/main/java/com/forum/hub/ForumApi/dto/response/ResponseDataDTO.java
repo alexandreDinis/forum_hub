@@ -1,4 +1,4 @@
-package com.forum.hub.ForumApi.dto;
+package com.forum.hub.ForumApi.dto.response;
 
 import com.forum.hub.ForumApi.model.topic.Response;
 

@@ -1,4 +1,4 @@
-package com.forum.hub.ForumApi.dto;
+package com.forum.hub.ForumApi.dto.curso;
 
 import com.forum.hub.ForumApi.model.curso.Category;
 import com.forum.hub.ForumApi.model.curso.Curso;

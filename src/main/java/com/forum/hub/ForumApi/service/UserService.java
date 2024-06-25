@@ -1,7 +1,7 @@
 package com.forum.hub.ForumApi.service;
 
-import com.forum.hub.ForumApi.dto.UserDTO;
-import com.forum.hub.ForumApi.dto.UserResponseDTO;
+import com.forum.hub.ForumApi.dto.user.UserDTO;
+import com.forum.hub.ForumApi.dto.user.UserResponseDTO;
 import com.forum.hub.ForumApi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

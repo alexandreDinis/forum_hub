@@ -1,6 +1,6 @@
 package com.forum.hub.ForumApi.service;
 
-import com.forum.hub.ForumApi.dto.CursoDTO;
+import com.forum.hub.ForumApi.dto.curso.CursoDTO;
 import com.forum.hub.ForumApi.model.curso.Curso;
 import com.forum.hub.ForumApi.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

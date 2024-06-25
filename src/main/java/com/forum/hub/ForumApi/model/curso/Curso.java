@@ -1,6 +1,6 @@
 package com.forum.hub.ForumApi.model.curso;
 
-import com.forum.hub.ForumApi.dto.CursoDTO;
+import com.forum.hub.ForumApi.dto.curso.CursoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

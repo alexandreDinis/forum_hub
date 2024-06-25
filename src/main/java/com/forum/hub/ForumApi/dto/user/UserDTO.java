@@ -1,4 +1,4 @@
-package com.forum.hub.ForumApi.dto;
+package com.forum.hub.ForumApi.dto.user;
 
 
 import com.forum.hub.ForumApi.model.user.Profile;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 public record UserDTO(
 
-        @NotNull
+
         Long id,
 
         @NotBlank
@@ -24,11 +24,11 @@ public record UserDTO(
         @NotBlank
         String password,
 
-        @NotBlank
+        @NotNull
         @Valid
         Profile profile,
 
-        @NotBlank
+        @NotNull
         LocalDateTime dateCreate){
 
     public UserDTO(User data) {

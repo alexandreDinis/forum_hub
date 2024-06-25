@@ -10,4 +10,6 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
 
     @Query("SELECT t FROM Topic t WHERE t.id = :id AND t.status = true")
     Topic findActiveTopicById(@Param("id") Long id);
+
+    boolean existsByTitleAndMessage(String title, String message);
 }

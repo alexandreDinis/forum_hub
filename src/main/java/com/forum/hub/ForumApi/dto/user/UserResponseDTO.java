@@ -1,4 +1,4 @@
-package com.forum.hub.ForumApi.dto;
+package com.forum.hub.ForumApi.dto.user;
 
 import com.forum.hub.ForumApi.model.user.User;
 import jakarta.validation.Valid;

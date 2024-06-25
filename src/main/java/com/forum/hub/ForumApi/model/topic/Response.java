@@ -1,7 +1,7 @@
 package com.forum.hub.ForumApi.model.topic;
 
 
-import com.forum.hub.ForumApi.dto.ResponseDataDTO;
+import com.forum.hub.ForumApi.dto.response.ResponseDataDTO;
 import com.forum.hub.ForumApi.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;

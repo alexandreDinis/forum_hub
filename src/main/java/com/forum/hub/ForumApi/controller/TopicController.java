@@ -1,8 +1,9 @@
 package com.forum.hub.ForumApi.controller;
 
-import com.forum.hub.ForumApi.dto.ResponseDataDTO;
-import com.forum.hub.ForumApi.dto.TopicDTO;
-import com.forum.hub.ForumApi.dto.TopicResponseDTO;
+import com.forum.hub.ForumApi.dto.response.ResponseDataDTO;
+import com.forum.hub.ForumApi.dto.topic.TopicDTO;
+import com.forum.hub.ForumApi.dto.topic.TopicResponseDTO;
+import com.forum.hub.ForumApi.dto.topic.UpdateTopicDTO;
 import com.forum.hub.ForumApi.service.TopicService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -32,12 +33,12 @@ public class TopicController {
     }
 
     @GetMapping
-    public Page<TopicResponseDTO>list(Pageable pageable) {
+    public Page<TopicResponseDTO> list (Pageable pageable) {
         return  service.list(pageable);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity getTopicDetails(@PathVariable Long id) {
+    public ResponseEntity getTopicDetails (@PathVariable Long id) {
         var topic = service.getTopicDetails(id);
 
         return ResponseEntity.ok(topic);
@@ -57,5 +58,14 @@ public class TopicController {
         var  newResponse = service.createResponse(id , data );
 
         return ResponseEntity.ok(newResponse);
+    }
+
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity<?> update (@PathVariable Long id, @RequestBody @Valid UpdateTopicDTO data) {
+
+        service.updateResponse(id, data.user_id(), data.response_id());
+
+        return ResponseEntity.ok().build();
     }
 }

@@ -1,7 +1,7 @@
 package com.forum.hub.ForumApi.controller;
 
 
-import com.forum.hub.ForumApi.dto.CursoDTO;
+import com.forum.hub.ForumApi.dto.curso.CursoDTO;
 import com.forum.hub.ForumApi.service.CursoService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

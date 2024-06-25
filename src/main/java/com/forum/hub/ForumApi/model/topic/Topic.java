@@ -1,6 +1,6 @@
 package com.forum.hub.ForumApi.model.topic;
 
-import com.forum.hub.ForumApi.dto.TopicDTO;
+import com.forum.hub.ForumApi.dto.topic.TopicDTO;
 import com.forum.hub.ForumApi.model.curso.Curso;
 import com.forum.hub.ForumApi.model.user.User;
 import jakarta.persistence.*;

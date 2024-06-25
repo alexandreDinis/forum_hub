@@ -1,7 +1,12 @@
 package com.forum.hub.ForumApi.service;
 
 
-import com.forum.hub.ForumApi.dto.*;
+import com.forum.hub.ForumApi.dto.response.ResponseDTO;
+import com.forum.hub.ForumApi.dto.response.ResponseDataDTO;
+import com.forum.hub.ForumApi.dto.topic.TopicDTO;
+import com.forum.hub.ForumApi.dto.topic.TopicDetalsDTO;
+import com.forum.hub.ForumApi.dto.topic.TopicResponseDTO;
+import com.forum.hub.ForumApi.infra.exception.ResponseNotFoundException;
 import com.forum.hub.ForumApi.infra.exception.TopicClosedException;
 import com.forum.hub.ForumApi.infra.exception.UserNotFoundException;
 import com.forum.hub.ForumApi.model.topic.Response;
@@ -10,10 +15,13 @@ import com.forum.hub.ForumApi.repository.CursoRepository;
 import com.forum.hub.ForumApi.repository.ResponseRepository;
 import com.forum.hub.ForumApi.repository.TopicRepository;
 import com.forum.hub.ForumApi.repository.UserRepository;
+import com.forum.hub.ForumApi.service.validation.ITopicsValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TopicService {
@@ -31,6 +39,9 @@ public class TopicService {
     @Autowired
     private ResponseRepository responseRepository;
 
+    @Autowired
+    private List<ITopicsValidations> validations;
+
 
     public TopicDTO createTopic(TopicDTO data) {
 
@@ -41,6 +52,9 @@ public class TopicService {
                 .orElseThrow(() -> new UserNotFoundException("curso not found"));
 
         var newTopic = new Topic(data);
+
+        validations.forEach(v -> v.validate(newTopic));
+
         newTopic.setAuthor(user);
         newTopic.setCurso(curso);
 
@@ -88,5 +102,24 @@ public class TopicService {
         user.getResponses().add(newResponse);
 
         return new ResponseDTO(newResponse);
+    }
+
+    public void updateResponse(Long id, Long userId, Long response_id) {
+
+        var topic = repository.findById(id)
+                .orElseThrow(() -> new TopicClosedException("Topic with id " + id + " not found"));
+
+        if(topic.getAuthor().getId().equals(userId)) {
+
+            Response responseToUpdate = topic.getResponses().stream()
+                    .filter(response -> response.getId().equals(response_id))
+                    .findFirst()
+                    .orElseThrow(() -> new ResponseNotFoundException("Response with id " + response_id + " not found in topic with id " + id));
+
+            responseToUpdate.setSolution(true);
+            repository.save(topic);
+        } else {
+            throw new UserNotFoundException("User is not the owner of the topic");
+        }
     }
 }
