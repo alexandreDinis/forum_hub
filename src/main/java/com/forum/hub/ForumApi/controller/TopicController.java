@@ -5,6 +5,7 @@ import com.forum.hub.ForumApi.dto.topic.TopicDTO;
 import com.forum.hub.ForumApi.dto.topic.TopicResponseDTO;
 import com.forum.hub.ForumApi.dto.topic.UpdateTopicDTO;
 import com.forum.hub.ForumApi.service.TopicService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicController {
 
 

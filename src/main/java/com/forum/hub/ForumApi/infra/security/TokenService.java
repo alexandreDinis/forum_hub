@@ -23,8 +23,8 @@ public class TokenService {
         try {
             var algoritmo = Algorithm.HMAC256(SECRET);
             return JWT.create()
-                    .withIssuer("Forum_Hub")
-                    .withSubject(user.getProfile().getName())
+                    .withIssuer("Forum_hub")
+                    .withSubject(user.getUsername())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception){
@@ -40,7 +40,7 @@ public class TokenService {
         try {
             var algoritmo = Algorithm.HMAC256(SECRET);
             return JWT.require(algoritmo)
-                    .withIssuer("Forum_Hub")
+                    .withIssuer("Forum_hub")
                     .build()
                     .verify(tokenJWT)
                     .getSubject();

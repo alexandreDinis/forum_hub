@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.forum.hub.ForumApi.model.user.User;
@@ -31,12 +32,16 @@ public class UserService implements UserDetailsService {
     @Lazy
     private AuthenticationManager manager;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     public User regiter(UserDTO data) {
 
         var profile = profileService.register(data.profile().getName());
 
         var newUser = new User(data, profile);
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
         return userRepository.save(newUser);
     }

@@ -8,6 +8,7 @@ import com.forum.hub.ForumApi.infra.security.TokenJWT;
 import com.forum.hub.ForumApi.infra.security.TokenService;
 import com.forum.hub.ForumApi.model.user.User;
 import com.forum.hub.ForumApi.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ public class UserController {
         return ResponseEntity.ok(new UserDTO(newUser));
     }
 
+
+
     @GetMapping
     public Page<UserResponseDTO> list (Pageable pageable) {
         return service.list(pageable);
@@ -44,9 +47,9 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity login (@RequestBody @Valid AuthenticationDTO data) {
 
-        var autetication = service.authentication(data);
+        var authentication = service.authentication(data);
 
-        var token = tokenService.gerarToken((User) autetication.getPrincipal());
+        var token = tokenService.gerarToken((User) authentication.getPrincipal());
 
         return ResponseEntity.ok(new TokenJWT(token));
     }
